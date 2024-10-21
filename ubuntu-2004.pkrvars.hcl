@@ -7,4 +7,4 @@ boot_command = [
   "autoinstall ",
   "ds=nocloud-net;",
   "<enter>"
-]  
+]

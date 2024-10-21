@@ -5,3 +5,5 @@ packer build -var-file="ubuntu-2004.pkrvars.hcl" `
   -var='os_iso_url=https://ftp.halifax.rwth-aachen.de/ubuntu-releases/focal/ubuntu-20.04.4-live-server-amd64.iso' `
   -var='vsphere_guest_os_type=ubuntu64Guest' `
   -var='vsphere_vm_name=tpl-ubuntu-2004' .
+
+  packer build -var-file="ubuntu-2004.pkrvars.hcl" -var='vsphere_guest_os_type=ubuntu64Guest' -var='vsphere_vm_name=tpl-ubuntu-2004' .
