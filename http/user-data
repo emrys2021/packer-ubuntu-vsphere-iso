@@ -12,26 +12,26 @@ autoinstall:
         hostname: ubuntu-server
         username: vagrant
         password: '$6$rounds=4096$5CU3LEj/MQvbkfPb$LmKEF9pCfU8R.dA.GemgE/8GT6r9blge3grJvdsVTMFKyLEQwzEF3SGWqAzjawY/XHRpWj4fOiLBrRyxJhIRJ1'
-    # network:    # 指定any好像不行，packer输出会显示能获取ip，但是进入虚拟机执行ip a，看不到网卡获取到ip，不知道ip获取到了什么地方
+    # network:    #! 指定any好像不行，packer输出会显示能获取ip，但是进入虚拟机执行ip a，看不到网卡获取到ip，不知道ip获取到了什么地方
     #     version: 2
     #     ethernets:
     #         any: # 如果默认interface name不是这个如何提前获取并写入netplan yaml文件呢
     #             dhcp4: true
     #             dhcp6: false
-    # network: # 指定一个自定义标识符id0，然后match网卡名是可以获取到ip的，就是配置文件看着比较怪，实际是指定了systemd-networkd的运行时配置文件中的match部分字段
-    #     version: 2
-    #     ethernets:
-    #         id0:
-    #             match: # 如果默认interface name不是这个如何提前获取并写入netplan yaml文件呢
-    #                 name: ens*
-    #             dhcp4: true
-    #             dhcp6: false
-    network:    # 如果不指定，默认写入的netplan yaml文件只有2行空配置，无法启动dhcp client，后面2个配置都是可以的，之前一直不行是这个配置文件没指定端口组
+    network: # 指定一个自定义标识符id0，然后match网卡名是可以获取到ip的，就是配置文件看着比较怪，实际是指定了systemd-networkd的运行时配置文件中的match部分字段
         version: 2
         ethernets:
-            ens192: # 如果默认interface name不是这个如何提前获取并写入netplan yaml文件呢
+            id0:
+                match: # 如果默认interface name不是这个如何提前获取并写入netplan yaml文件呢
+                    name: ens*
                 dhcp4: true
                 dhcp6: false
+    # network:    # 如果不指定，默认写入的netplan yaml文件只有2行空配置，无法启动dhcp client，后面2个配置都是可以的，之前一直不行是这个配置文件没指定端口组
+    #     version: 2
+    #     ethernets:
+    #         ens192: # 如果默认interface name不是这个如何提前获取并写入netplan yaml文件呢
+    #             dhcp4: true
+    #             dhcp6: false
     ssh:
         install-server: yes
         allow-pw: yes
@@ -53,8 +53,8 @@ autoinstall:
         - ufw
         # - unzip   # 安装unzip报错100
         # - python3   # 安装python3报错100
-        - python3-pip
-        - sshpass
+        # - python3-pip # 安装python3-pip报错100
+        # - sshpass # 安装sshpass报错100
     user-data:
         disable_root: false
     late-commands:

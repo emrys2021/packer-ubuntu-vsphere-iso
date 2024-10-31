@@ -23,6 +23,7 @@ vsphere_datastore = "datastore3-2"
 vsphere_guest_os_type = "ubuntu64Guest"
 
 # cloud_init files for unattended configuration for Ubuntu
+# cloud_init 指定本地路径，不使用远端路径
 cloudinit_userdata = "./http/user-data"
 cloudinit_metadata = "./http/meta-data"
 
